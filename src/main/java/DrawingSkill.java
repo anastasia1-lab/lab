@@ -1,23 +1,28 @@
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.function.Function;
-
 public class DrawingSkill {
-    private static Function<Double, Integer> defaultXHandler = x -> (int) (200 * x + 256);
-    private static Function<Double, Integer> defaultYHandler = y -> (int) (-200*y +256);
-
-    public static BufferedImage emptyImage() {
-        BufferedImage image = new BufferedImage(512,512,BufferedImage.TYPE_INT_RGB);
-        Color color = new Color(255,255,255);
-        for (int i = 0; i < 512; i++) {
-            for (int j = 0; j < 512; j++) {
-                image.setRGB(i,j,color.getRGB());
-            }
-        }
-        return image;
+    public static void drawLine(TargetImage image, Polygon.Point start, Polygon.Point finish) {
+        double x1 = start.objectV.getX();
+        double x2 = finish.objectV.getX();
+        double y1 = start.objectV.getY();
+        double y2 = finish.objectV.getY();
+        drawLineInternal(image, x1, y1, x2, y2);
     }
 
-    public static void drawPolygonOnImage(Polygon polygon, BufferedImage image) {
+    //TODO нужно реализовать алгоритм рисовалки линии
+    /**
+     * @see TargetImage#drawOnePoint(double, double) используй этот метод для рисования точки
+     */
+    private static void drawLineInternal(TargetImage image, double x1, double y1, double x2, double y2) {
 
+    }
+
+    /** TODO нужно вытащить точки из полигонов и заюзать следующий метод
+     * TODO будет 3 линии (a,b) (b,c) (c,a)
+     * @see DrawingSkill#drawLine
+     */
+    public static void drawPolygonOnImage(TargetImage image, Polygon polygon) {
+        // я уже написал за тебя осталось только drawLineInternal написать, самое сложное
+        drawLine(image, polygon.a, polygon.b);
+        drawLine(image, polygon.b, polygon.c);
+        drawLine(image, polygon.c, polygon.a);
     }
 }
