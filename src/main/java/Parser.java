@@ -69,4 +69,11 @@ public class Parser {
         }
     }
 
+    public static List<Polygon> parse(String fileName) {
+        List<String> linesFromFile = Parser.getLinesFromFile(fileName);
+        Map<Class, List<Once>> classOnceMap = Parser.onceFromLines(linesFromFile);
+        List<BeforePolygon> beforePolygons = Parser.beforePolygonsFromLines(linesFromFile);
+        return Parser.mapToRealPolygons(beforePolygons, classOnceMap);
+    }
+
 }
